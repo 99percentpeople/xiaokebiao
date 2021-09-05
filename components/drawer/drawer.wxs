@@ -1,0 +1,87 @@
+/***
+ * 兼容问题 反馈微信：ClassExtends
+ * ***/
+var pageX = null,
+  is = false,
+  status = false,
+  width = 200,
+  barWidth=40,
+  time = null;
+
+var root, mask, move, shadow, bar;
+
+var init = function (s) {
+  if (!root || !mask || !move || !shadow || !bar) {
+    root = s.selectComponent(".root");
+    mask = s.selectComponent(".mask");
+    move = s.selectComponent(".start");
+    shadow = s.selectComponent(".shadow");
+    bar = s.selectComponent(".bar");
+  }
+};
+
+var translate = function (v) {
+  root.addClass("anime");
+  move.setStyle("transform: translateX(" + (v == false ? -width : 0) + "px)");
+  if (v == true) {
+    root.addClass("status_start");
+    mask.setStyle("opacity:1");
+    shadow.setStyle("opacity:1");
+  } else {
+    root.removeClass("status_start");
+    mask.setStyle("opacity:0");
+    shadow.setStyle("opacity:0");
+  }
+  status = v;
+};
+
+module.exports = {
+  start: function (e, s) {
+    if (status == false && e.touches[0].pageX > barWidth) return;
+    if (status == true && e.touches[0].pageX > 200) return;
+    is = true;
+    root.removeClass("anime");
+  },
+  move: function (e) {
+    if (is == false) return;
+    if (pageX == null) pageX = e.touches[0].pageX;
+    if (time == null) time = getDate().getTime();
+    var x = e.touches[0].pageX - pageX;
+    x = status == true ? 0 + x : x - width;
+    x = x > 0 ? 0 : x;
+    x = x < -width ? -width : x;
+    var opacity = {
+      opacity: (x + width) / width,
+    };
+    move.setStyle({
+      transform: "translateX(" + x + "px)",
+    });
+    mask.setStyle(opacity);
+    shadow.setStyle(opacity);
+    return false;
+  },
+  end: function (e) {
+    if (is == false || pageX == null || time == null) return;
+    var tm = getDate().getTime() - time;
+    var x = e.changedTouches[0].pageX - pageX;
+    var v = status;
+    if (status == false) {
+      if ((tm < 200 && x > 20) || (tm > 200 && x > 100)) v = true;
+    } else {
+      if ((tm < 200 && x < -20) || (tm > 200 && x < -100)) v = false;
+    }
+    translate(v);
+    (is = false), (pageX = null), (time = null);
+    return false;
+  },
+  change: function (v, o, s) {
+    init(s);
+    translate(v);
+  },
+  onMask: function () {
+    translate(false);
+  },
+  onstart:function(){
+    translate(true);
+  }
+};

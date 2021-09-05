@@ -1,0 +1,41 @@
+/* components/ClassTable/ClassTable.wxss */
+.class-table {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+.scroll-bar {
+  width: 30rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.vertial-view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sss{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.small-text{
+  text-align: center;
+  font-size: small;
+  color: white;
+}

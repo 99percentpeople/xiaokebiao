@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/accountPage/accountPage",
+    "pages/settingPage/settingPage"
+    ],
+  "window": {
+    "navigationBarTitleText": "小课表"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "weui": true
+  },
+  "usingComponents": {
+    "drawer": "/components/drawer/drawer"
+  }
+}

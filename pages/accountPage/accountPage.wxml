@@ -1,0 +1,26 @@
+<!--pages/accountPage/accountPage.wxml-->
+<van-cell-group title="教务网账号">
+  <van-cell border="{{ false }}">
+    <van-field
+    value="{{ account.username }}"
+    required
+    border="{{ false }}"
+    clearable
+    label="用户名："
+    icon="question-o"
+    placeholder="请输入用户名"
+    bind:click-icon="onClickIcon"
+    bind:change="handleInputusername"
+  />
+  <van-field
+  value="{{ account.password }}"
+    type="password"
+    label="密码："
+    border="{{ false }}"
+    placeholder="请输入密码"
+    required
+    bind:change="handleInputpassword"
+  />
+  </van-cell>
+    <van-button type="primary" size="small" bind:click="onSubmit" round block>确认账号</van-button>
+</van-cell-group>

@@ -1,0 +1,120 @@
+@import "/app.wxss";
+
+.root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100%;
+  z-index: inherit;
+}
+
+.bar {
+  height: 100%;
+  width: 40px;
+  float: left;
+  box-shadow: 0 8rpx 10rpx -5rpx rgba(0, 0, 0, 0.2),
+    0 16rpx 24rpx 2rpx rgba(0, 0, 0, 0.14),
+    0 6rpx 30rpx 5rpx rgba(0, 0, 0, 0.12);
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.56);
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
+  z-index: inherit;
+}
+
+.status_start .mask {
+  pointer-events: auto;
+}
+
+.anime .mask {
+  transition: opacity 0.2s;
+}
+
+.start {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px;
+  z-index: inherit;
+  transform: translateX(-200px);
+  will-change: transform;
+}
+
+.anime .start {
+  transition: transform 0.2s;
+}
+
+.shadow,
+.inner-navbar {
+  width: 200px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  z-index: inherit;
+}
+
+.shadow {
+  box-shadow: 0 8rpx 10rpx -5rpx rgba(0, 0, 0, 0.2),
+    0 16rpx 24rpx 2rpx rgba(0, 0, 0, 0.14),
+    0 6rpx 30rpx 5rpx rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  will-change: opacity;
+  pointer-events: none;
+}
+
+.anime .shadow {
+  transition: opacity 0.2s;
+}
+
+.icon,
+.inner-item {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0.01);
+  margin-bottom: 40rpx;
+}
+
+.icon view {
+  width: 100%;
+  height: 100%;
+  line-height: 200%;
+  text-align: center;
+  font-size: larger;
+}
+
+.inner-item view {
+  width: 95%;
+  height: 100%;
+  float: right;
+  line-height: 200%;
+  text-align: left;
+  font-size: large;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: gray;
+  margin-bottom: 20rpx;
+}
+
+.wellcome {
+  width: 100%;
+  height: 60px;
+}
+
+.content{
+  width: 100%;
+}

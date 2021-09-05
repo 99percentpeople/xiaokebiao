@@ -1,0 +1,19 @@
+<!--components/ClassTable/ClassTable.wxml-->
+<view class="class-table">
+    <view class="vertial-view">
+        <DateBar weeklist="{{kbdata.calendar[swiperCurrent]}}" nowdate="{{nowdate}}"></DateBar>
+        <view class="sss">
+            <swiper duration="200" easing-function="easeOutCubic" current="{{currentzc}}"
+                bindchange="handleSwiperChange" class="swiper" vertical="{{slidingdirection}}">
+                <swiper-item wx:for="{{kbdata.classesInfo}}" wx:key="index">
+                    <InnerTable classes="{{item}}" nowdate="{{nowdate}}" weeklist="{{kbdata.calendar[swiperCurrent]}}"
+                        status="{{index<currentzc?-1:(index==currentzc? 0 : 1)}}"></InnerTable>
+                </swiper-item>
+            </swiper>
+            <view class="scroll-bar">
+                <view class="jc small-text" wx:for="{{12}}" wx:key="index">{{item+1}}
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

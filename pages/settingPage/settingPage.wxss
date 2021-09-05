@@ -1,0 +1,25 @@
+/* pages/settingPage/settingPage.wxss */
+
+.themeTest{
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+  border-radius: 40rpx;
+}
+.themeTest text{
+  font-size: medium;
+  font-weight: 800;
+}
+.chooseimage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.del{
+  background-color: red;
+  width: 100rpx;
+  text-align: center;
+}

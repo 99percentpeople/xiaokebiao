@@ -1,0 +1,3 @@
+wx.request({
+  url: 'url',
+})

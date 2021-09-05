@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "DateBar":"/components/DateBar/DateBar",
+    "InnerTable":"/components/InnerTable/InnerTable"
+  }
+}

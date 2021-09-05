@@ -1,0 +1,34 @@
+/**index.wxss**/
+.page{
+  width: 100vw;
+  height: 100vh;
+}
+
+.userInfo{
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-items: center;
+}
+.userinfo-avatar{
+  overflow: hidden;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-left: 20rpx;
+}
+.greet{
+  margin-left: 20rpx;
+}
+
+.con{
+  height: 100%;
+}
+
+.bgImg{
+  position: absolute;
+  opacity: 1;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}

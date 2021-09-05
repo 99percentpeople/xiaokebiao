@@ -1,0 +1,48 @@
+/* components/InnerTable/InnerTable.wxss */
+
+.table {
+  height: 100%;
+  width: 100%;
+}
+
+.boundary {
+  width: 80%;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.kb-item {
+  box-shadow: 0 0 10rpx rgba(128, 128, 128, 0.432);
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.kcmc {
+  overflow: hidden;
+  height: 80%;
+  text-align: center;
+}
+
+.jxcdmc {
+  overflow: hidden;
+  background-color: rgba(128, 128, 128, 0.150);
+  width: 100%;
+  height: 20%;
+  text-align: center;
+}
+.smalltext {
+  font-size: 8pt;
+  color: #fff;
+  font-weight: 400;
+}
+
+.mediumtext {
+  font-size: small;
+  color: #fff;
+  font-weight: 400;
+}
