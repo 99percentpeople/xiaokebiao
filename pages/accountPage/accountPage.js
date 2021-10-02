@@ -1,100 +1,183 @@
 // pages/accountPage/accountPage.js
-const app=getApp()
-
+import { Event } from "../../utils/gevent";
+const app = getApp();
+import { request, downloadFile } from "../../utils/request";
+import {
+  getclasseslist,
+  login,
+  getfirstDay,
+  changeVerifyCode,
+  kbdistinguishtimeperiods,
+} from "../../utils/jxfw";
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    account:{
-      username:"",
-      password:""
-    }
+    datenow: Date.now(),
+    tmpPath: "",
+    edituser: false,
+    islogged: false,
+    account: "",
+    pwd: "",
+    showdlg: false,
+    verifycode: "",
+    w: ["日", "一", "二", "三", "四", "五", "六"],
+    classList:[]
   },
-  onSubmit(){
-    console.log("onSubmit")
-    if(!this.data.account.username||!this.data.account.password){
-      wx.showModal({
-        title:"提示",
-        content:"用户名或密码为空！"
+
+
+  onClickIcon() {
+    wx.showModal({
+      title: "提示",
+      content: "登录密码为教务管理系统的密码",
+      showCancel: false,
+    });
+  },
+  onShowDlg() {
+    this.setData({ showdlg: true });
+  },
+  onUpdate() {
+    wx.showLoading({
+      title: "正在获取课表",
+    });
+    this.setData({ islogged: false });
+    getclasseslist()
+      .then((res) => {
+        wx.setStorage({
+          key: "data",
+          data: res,
+          success() {},
+          fail() {
+            wx.hideLoading({});
+            wx.showToast({
+              title: "课表保存失败",
+              icon: "error",
+            });
+          },
+        });
       })
-      return
-    }
-    wx.request({
-      url: 'https://jxfw.gdut.edu.cn/',
-      header:"Content-Type: text/html",
-      method:"GET",
-      responseType:"text",
-      success:function(res){
-        console.log(res.data)
-      }
-    })
+      .then((res) => {
+        return getfirstDay();
+      })
+      .then((res) => {
+        wx.setStorage({
+          key: "rq",
+          data: res,
+          success() {
+            wx.showToast({
+              title: "获取课表成功",
+            });
+            wx.setStorage({
+              key:"data_status",
+              data:"update",
+              success:()=>{
+                wx.navigateBack({})
+              }
+            })
+          },
+          fail() {
+            wx.showToast({
+              title: "日期保存失败",
+              icon: "error",
+            });
+          },
+        });
+      })
+      .catch((err) => {
+        wx.showToast({
+          title: "发生错误",
+          icon: "error",
+        });
+      });
   },
-  handleInputusername({detail}){
-    this.setData({"account.username":detail})
+  onSubmit() {
+    wx.showLoading({title:"登录中"})
+    login(this.data.account, this.data.pwd, this.data.verifycode)
+      .then((res) => {
+        if (this.data.edituser) {
+          app.setting.account = this.data.account;
+          app.setting.pwd = this.data.pwd;
+        }
+        wx.showToast({
+          title: res,
+          icon: "success",
+        });
+        this.setData({ islogged: true });
+        this.onUpdate();
+      })
+      .catch((err) => {
+        wx.showToast({
+          title: err,
+          icon: "error",
+        });
+      })
+      .finally(() => {
+        this.onChange();
+      });
   },
-  handleInputpassword({detail}){
-    this.setData({"account.password":detail})
+  onModify() {
+    wx.showModal({
+      title: "提示",
+      content: "您确定要重新设置账号吗？",
+      success: (res) => {
+        if (res.confirm) {
+          this.onChange();
+          app.setting.account = "";
+          app.setting.pwd = "";
+          this.setData({
+            account: "",
+            pwd: "",
+          });
+        }
+      },
+    });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-app.watchSetting(["account"],(e)=>{
-  console.log(e)
-})
+  onChange() {
+    this.setData({ tmpPath: "" });
+    changeVerifyCode()
+      .then((res) => {
+        this.setData({ tmpPath: res, verifycode: "" });
+      })
+      .catch((err) => {
+        wx.showToast({
+          title: "获取验证码失败",
+          icon: "error",
+        });
+      });
+  },
+  onLoad(options) {
     wx.setNavigationBarColor({
       frontColor: getApp().setting.frontColor,
       backgroundColor: getApp().setting.themeColor,
     });
+    getApp().watchSetting(
+      ["account", "pwd"],
+      ({ account, pwd }) => {
+        this.setData({
+          edituser: !getApp().setting.account || !getApp().setting.pwd,
+        });
+        this.setData({
+          account: account ? account : this.data.account,
+          pwd: pwd ? pwd : this.data.pwd,
+        });
+      },
+      true
+    );
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onReady(){
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-
+    if (this.data.edituser) {
+      this.onChange();
+    }
+    wx.getStorage({
+      key: "data_status",
+      success: ({ data }) => {
+        if (data == "default"||data == "update") {
+          this.setData({classList:wx.getStorageSync('data')})
+        }
+      },
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
-})
+});

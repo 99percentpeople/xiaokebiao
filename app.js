@@ -1,33 +1,12 @@
 // app.js
 //app.js
-
+import { Event } from "/utils/gevent";
+import {globalData} from "./utils/util"
 App({
-  globalData: {
-    _setting: {
-      _themeColor: "#DCDCDC",
-      _frontColor: "#000000",
-      _bgImg: false,
-      _bgImgPath: "",
-      _slidingdirection: true,
-      _xiaoxiaole: true,
-      _account: {
-        _username: "",
-        _password: "",
-      },
-    },
-    _methods: {},
-  },
+  globalData:new globalData(),
   //onLaunch,onShow: options(path,query,scene,shareTicket,referrerInfo(appId,extraData))
   onLaunch: function (options) {
-    let that = this;
-    try {
-      let value = wx.getStorageSync("_setting");
-      if (value) {
-        this.globalData._setting = value;
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
+    Object.assign(this.globalData._setting, wx.getStorageSync("_setting"));
     Object.defineProperty(this, "setting", {
       get() {
         return this.globalData._setting;
@@ -45,6 +24,7 @@ App({
     this.watchSetting(
       ["themeColor", "frontColor"],
       ({ themeColor, frontColor }) => {
+
         wx.setNavigationBarColor({
           frontColor: frontColor ? frontColor : this.setting.frontColor, // 必写项【该字体颜色仅支持 #ffffff 和 #000000 】
           backgroundColor: themeColor ? themeColor : this.setting.themeColor, // 传递的颜色值【仅支持有效值为十六进制颜色】
@@ -57,7 +37,9 @@ App({
       true
     );
   },
-  onShow: function (options) {},
+  onShow: function (options) {
+    wx.event = new Event();
+  },
   onHide: function () {},
   onError: function (msg) {},
   //options(path,query,isEntryPage)

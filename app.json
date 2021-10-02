@@ -2,17 +2,39 @@
   "pages": [
     "pages/index/index",
     "pages/accountPage/accountPage",
-    "pages/settingPage/settingPage"
-    ],
+    "pages/achievementPage/achievementPage",
+    "pages/settingPage/settingPage",
+    "pages/aboutPage/aboutPage",
+    "pages/editPage/editPage"
+  ],
   "window": {
     "navigationBarTitleText": "小课表"
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "useExtendedLib": {
-    "weui": true
-  },
+  "useExtendedLib": {},
   "usingComponents": {
-    "drawer": "/components/drawer/drawer"
+    "drawer": "/components/drawer/drawer",
+    "van-switch": "@vant/weapp/switch/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index"
   }
 }

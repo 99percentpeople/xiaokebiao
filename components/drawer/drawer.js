@@ -1,13 +1,28 @@
 Component({
   properties: {
-    status_start: Boolean,
     pagesList: Array,
-    themeColor:String,
-    frontColor:String,
+    fullscreenImg:Boolean
+  },
+  data: {
+    bgImg: false,
+    
   },
   options: {
     multipleSlots: true,
   },
-  pageLifetimes:{
-  }
+  lifetimes: {
+    attached() {
+      getApp().watchSetting(
+        ["bgImg"],
+        ({ bgImg }) => {
+          this.setData({ bgImg });
+        },
+        true
+      );
+      getApp().watchSetting(["fullscreenImg"],({fullscreenImg})=>{
+        this.setData({fullscreenImg})
+      },true)
+      
+    },
+  },
 });

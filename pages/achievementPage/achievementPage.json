@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "LoginDlg": "/components/LoginDlg/LoginDlg"
+    
+  },
+  "navigationBarTitleText": "成绩查询"
+}

@@ -1,19 +1,56 @@
 <!--components/ClassTable/ClassTable.wxml-->
 <view class="class-table">
-    <view class="vertial-view">
-        <DateBar weeklist="{{kbdata.calendar[swiperCurrent]}}" nowdate="{{nowdate}}"></DateBar>
-        <view class="sss">
-            <swiper duration="200" easing-function="easeOutCubic" current="{{currentzc}}"
-                bindchange="handleSwiperChange" class="swiper" vertical="{{slidingdirection}}">
-                <swiper-item wx:for="{{kbdata.classesInfo}}" wx:key="index">
-                    <InnerTable classes="{{item}}" nowdate="{{nowdate}}" weeklist="{{kbdata.calendar[swiperCurrent]}}"
-                        status="{{index<currentzc?-1:(index==currentzc? 0 : 1)}}"></InnerTable>
-                </swiper-item>
-            </swiper>
-            <view class="scroll-bar">
-                <view class="jc small-text" wx:for="{{12}}" wx:key="index">{{item+1}}
-                </view>
+    <DateBar wx:if="{{calendar}}" weeklist="{{calendar[swiperCurrent]}}" nowdate="{{nowdate}}" fullscreenImg="{{fullscreenImg}}" bgImg="{{bgImg}}"></DateBar>
+
+    <view class="aaa ">
+        <swiper duration="200" easing-function="easeOutCubic" current="{{currentzc}}" bindchange="handleSwiperChange" class="swiper {{!fullscreenImg&&bgImg ?'bgImg' : ''}} " vertical="{{slidingdirection}}">
+            <swiper-item wx:for="{{classesInfo}}" wx:key="index">
+                <InnerTable classes="{{item}}" nowdate="{{nowdate}}" outerIdx="{{index}}" weeklist="{{calendar[index]}}" status="{{index<currentzc?-1:index>currentzc? 1:0}}" bindshowcard="showCard"></InnerTable>
+            </swiper-item>
+        </swiper>
+
+        <view wx:if="{{calendar}}" class="scroll-bar {{fullscreenImg&&bgImg?'transparent-background':'theme-color'}}">
+            <view class="jc small-text" wx:for="{{12}}" wx:key="index">{{item+1}}
             </view>
         </view>
     </view>
 </view>
+
+<van-popup round duration="200" show="{{ showCard }}" bind:close="onClose">
+    <view class="card">
+        <view class="card-page" style="display:{{tabbarActive==0?'block':'none'}};">
+            <van-cell-group>
+                <van-cell title="{{card.kcmc}}" />
+                <van-cell title="上课地点" value="{{card.zdjxcdmc}}" />
+                <van-cell title="上课时间" value="{{card.sksj}}" />
+                <van-cell title="授课教师" value="{{card.teaxms}}" />
+                <van-cell title="课程学分" value="{{card.xf}}" />
+                <van-cell title="教学班级">
+                    <view wx:for="{{card.jxbmc}}" wx:key="index">{{item}}</view>
+                </van-cell>
+                <van-cell title="上课内容" use-label-slot>
+                    <text user-select decode slot="label">{{card.sknrjj}}</text>
+                </van-cell>
+            </van-cell-group>
+        </view>
+        <view class="card-page" style="display: {{tabbarActive==1?'block':'none'}};">
+            <van-cell-group title="快速设置">
+                <van-cell title="选择颜色" use-label-slot>
+                    <van-grid square border="{{false}}" slot="label">
+                        <van-grid-item wx:for="{{colorArrays}}" wx:key="index">
+                            <view slot="icon" bindtap="onChooseColor" data-index="{{index}}" class="color-picker" style="background-color: {{item}};">
+                            </view>
+                        </van-grid-item>
+                    </van-grid>
+                </van-cell>
+                <van-cell title-class="iconfont icon-bianji" title=" 转到课程编辑" url="/pages/editPage/editPage?kcmc={{card.kcmc}}" is-link link-type="navigateTo"></van-cell>
+            </van-cell-group>
+        </view>
+        <view class="tabbar">
+            <van-tabbar active="{{ tabbarActive }}" bind:change="onTabBarChange">
+                <van-tabbar-item icon="comment-o">信息</van-tabbar-item>
+                <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
+            </van-tabbar>
+        </view>
+    </view>
+</van-popup>

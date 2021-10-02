@@ -1,0 +1,58 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "账户界面",
+          "pathName": "pages/accountPage/accountPage",
+          "query": "",
+          "scene": null,
+          "partialCompile": {
+            "enabled": false,
+            "pages": []
+          }
+        },
+        {
+          "name": "成绩页面",
+          "pathName": "pages/achievementPage/achievementPage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "编辑页面",
+          "pathName": "pages/editPage/editPage",
+          "query": "kcmc=形势与政策",
+          "scene": null
+        },
+        {
+          "name": "编辑页面2",
+          "pathName": "pages/editPage/editPage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "关于界面",
+          "pathName": "pages/aboutPage/aboutPage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "设置页面",
+          "pathName": "pages/settingPage/settingPage",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

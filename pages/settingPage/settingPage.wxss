@@ -23,3 +23,30 @@
   width: 100rpx;
   text-align: center;
 }
+
+.donghua{
+  transition: all 0.5s;
+}
+
+.color-picker{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: large;
+  transition: all 0.5s;
+  pointer-events:none;
+}
+
+.icon-hidden{
+  display: none;
+}

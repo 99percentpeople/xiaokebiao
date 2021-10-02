@@ -3,6 +3,8 @@ Component({
   properties: {
     nowdate: Number,
     weeklist: Array,
+    fullscreenImg:Boolean,
+    bgImg:Boolean,
   },
   observers: {
     "nowdate,weeklist"() {
@@ -17,7 +19,7 @@ Component({
   },
   methods: {
     findToday() {
-      this.properties.weeklist.forEach((week) => {
+      for(let week of this.properties.weeklist){
         let date = new Date(this.properties.nowdate);
         let y = date.getFullYear();
         let m = date.getMonth() + 1;
@@ -27,7 +29,7 @@ Component({
             weeknow: date.getDay() ? date.getDay() : 7,
           });
         }
-      });
-    },
-  },
-});
+      }
+    }
+  }
+})
