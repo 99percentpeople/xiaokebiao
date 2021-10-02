@@ -1,4 +1,6 @@
 /**index.wxss**/
+@import "/app.wxss";
+
 .page{
   width: 100vw;
   height: 100vh;
@@ -17,6 +19,7 @@
   border-radius: 50%;
   margin-left: 20rpx;
 }
+
 .greet{
   margin-left: 20rpx;
 }
@@ -25,10 +28,6 @@
   height: 100%;
 }
 
-.bgImg{
-  position: absolute;
-  opacity: 1;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-}
+
+
+  

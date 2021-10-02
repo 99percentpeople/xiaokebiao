@@ -3,24 +3,34 @@
   <van-cell title="字体颜色" icon="{{fontColorchecked?'font':'font-o'}}">
     <van-switch checked="{{ fontColorchecked }}" bind:change="fontColorChange" active-color="{{rgb}}" />
   </van-cell>
-  <van-cell title="主题颜色" icon="{{fontColorchecked?'shop':'shop-o'}}" use-label-slot>
-    <view slot="label">
-      <view class="van-cell-text">点击更改主题颜色</view>
-    </view>
-    <view class="van-cell-text">
-      <view class="themeTest" style="background-color:{{rgb}};" bindtap="toPick">
-        <text style="color: {{frontColor}};">内容</text>
+  <van-cell  border="{{false}}" title="选择颜色" icon="brush-o"></van-cell>
+  <van-cell use-label-slot>
+    <van-grid column-num="6" square border="{{false}}" slot="label">
+      <van-grid-item wx:for="{{colorArrays}}" wx:key="index">
+        <view slot="icon" bindtap="onChooseColor" data-index="{{index}}" class="color-picker"
+          style="background-color: {{item}};">
+          <view wx:if="{{colorList[index]}}" class="iconfont icon-wanchengqueding icon"></view>
+        </view>
+      </van-grid-item>
+      <van-grid-item>
+        <view slot="icon" class="donghua color-picker" style="background-color:{{rgb}};" bindtap="toPick">
+        <text class="donghua x-small-text" style="color: {{frontColor}};">自定义</text>
       </view>
-    </view>
+      </van-grid-item>
+    </van-grid>
+    
   </van-cell>
   <van-cell title="自定义背景图片" icon="{{fontColorchecked?'photo':'photo-o'}}">
     <van-switch checked="{{bgImgchecked}}" bind:change="bgImgChanged" active-color="{{rgb}}" />
   </van-cell>
+  <van-cell wx:if="{{bgImgchecked}}" title="全屏图片" icon="{{fontColorchecked?'expand':'expand-o'}}">
+    <van-switch checked="{{ fullscreenImgChecked }}" bind:change="fullscreenImgChanged" active-color="{{rgb}}" />
+  </van-cell>
   <van-cell wx:if="{{bgImgchecked}}" title="选择图片">
     <view class="chooseimage">
-      <van-image width="100" height="100" fit="cover" src="{{bgImgPath}}" bindclick="handleloadImg">
+      <van-image radius="10" width="100" height="100" fit="cover" src="{{bgImgPath}}" bindclick="handleloadImg">
       </van-image>
-      <van-tag round type="danger" size="medium" closeable wx:if="{{bgImgPath}}" bind:close="handleDel">删除</van-tag>
+      <van-tag round type="danger" size="medium" closeable wx:if="{{bgImgPath}}" bind:tap="handleDel">删除</van-tag>
     </view>
   </van-cell>
 </van-cell-group>
@@ -30,6 +40,9 @@
   </van-cell>
   <van-cell title="滑动方向（横向/纵向）" label="设置课表的滑动方向" icon="{{slidingdirection?'down':'exchange'}}">
     <van-switch checked="{{ slidingdirection }}" bind:change="slidingdirectionChanged" active-color="{{rgb}}" />
+  </van-cell>
+  <van-cell>
+    <van-button color="{{rgb}}" bind:click="handleInit" block round>初始化设置</van-button>
   </van-cell>
 </van-cell-group>
 

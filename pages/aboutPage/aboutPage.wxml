@@ -1,0 +1,36 @@
+<!--pages/aboutPage/aboutPage.wxml-->
+<van-divider></van-divider>
+<van-cell-group inset>
+  <van-cell center title="关于课表" label="version 1.0.0 ©2021 YZZ" title-style="text-align:center; font-size:x-large;" />
+  <van-cell use-label-slot>
+    <text slot="title" decode>1、课表介绍</text>
+    <view slot="label">
+      <text class="text-line" decode>&nbsp;&nbsp;&nbsp;&nbsp;此程序是个人开发的，非官方的微信小程序，基于微信小程序原生框架以及vant-weapp组件库。由于各种原因，此课表并没由做后端开发，一切信息均来自于教务系统
+        https://jxfw.gdut.edu.cn/，并将所有信息保存在本地，您可以放心使用，并不用担心您的隐私会泄露。</text>
+    </view>
+  </van-cell>
+  <van-cell use-label-slot>
+    <text slot="title" decode>2、功能介绍</text>
+    <view slot="label">
+      <text class="text-line" decode>&nbsp;&nbsp;&nbsp;&nbsp;①课表导入功能：进入“我的课表”页面可以自动登录并导入教务网的课程信息。</text>
+      <text class="text-line"
+        decode>&nbsp;&nbsp;&nbsp;&nbsp;②课表编辑添加功能：在主页面任意选择一节课选择设置或者在导入后“我的课表”任意一门课下选择“转到课程编辑”可以跳转到课程编辑页面。</text>
+      <text class="text-line" decode>&nbsp;&nbsp;&nbsp;&nbsp;在此页面可以自由修改或添加一门课程，例如课程名称、教学班级、学分、课程卡片颜色以及上课时间段等。</text>
+      <text class="text-line"
+        decode>&nbsp;&nbsp;&nbsp;&nbsp;③丰富的个性化功能：进入设置页面，您可以自由修改文字颜色、主题色、背景图片等一系列内容，您的课表由您做主！</text>
+      <text class="text-line"
+        decode>&nbsp;&nbsp;&nbsp;&nbsp;④成绩查询功能：在“我的课表”页面登录后进入“成绩查询”页面，点击更新成绩按钮，即可导入成绩列表，并可以按照各个学期进行筛选分类，并计算平均绩点。</text>
+      <text class="text-line" decode>&nbsp;&nbsp;&nbsp;&nbsp;⑤更多功能：将会在以后推出更多功能，例如：“考试查询”、“校内新闻”等，有望在未来推出。</text>
+    </view>
+  </van-cell>
+  <van-cell border="{{false}}"  use-label-slot>
+    <text slot="title" decode>3、联系作者</text>
+    <view slot="label">
+      <text class="text-line" decode>&nbsp;&nbsp;&nbsp;&nbsp;如果您在使用过程中发现了bug，或者对此小程序的功能完善有更好的想法可以点击下面的按钮进行反馈。作者本人是一名19级广工土木人，平时学业繁忙，但一点会抽空认真阅读大家的建议。</text>
+    </view>
+  </van-cell>
+  <van-cell border="{{false}}" title="跳转到反馈页面" center>
+    <van-button icon="arrow" round open-type="feedback"></van-button>
+  </van-cell>
+</van-cell-group>
+<van-divider></van-divider>

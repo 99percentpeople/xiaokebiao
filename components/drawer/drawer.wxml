@@ -1,37 +1,37 @@
 <wxs module="drawer" src="./drawer.wxs"></wxs>
-<view class="root" status_start="{{status_start}}" change:status_start="{{drawer.change}}"
-  capture-bind:touchstart="{{drawer.start}}" capture-bind:touchmove="{{drawer.move}}"
-  capture-bind:touchend="{{drawer.end}}" bindtouchcancel="{{drawer.end}}">
-  <view class="bar" style="background-color: {{themeColor}};">
-    <button style="color: {{frontColor}};" catch:tap="{{drawer.onstart}}" class="icon">
+<view class="root {{fullscreenImg&&bgImg ?'bgImg' : ''}}" statusStart="{{statusStart}}"
+  change:statusStart="{{drawer.change}}" capture-bind:touchstart="{{drawer.start}}"
+  capture-bind:touchmove="{{drawer.move}}" capture-bind:touchend="{{drawer.end}}">
+  <view class="bar {{fullscreenImg&&bgImg?'transparent-background':'theme-color'}}">
+    <navigator capture-bind:tap="{{drawer.onStart}}" class="icon large-text">
       <view class="iconfont icon-zhankai"></view>
-    </button>
-    <navigator style="color: {{frontColor}};" wx:if="{{item.tag=='navigator'}}" wx:for="{{pagesList}}"
-      wx:for-item="item" wx:key="index" class="icon" url="{{item.path}}">
+    </navigator>
+    <navigator wx:if="{{item.tag=='navigator'}}" wx:for="{{pagesList}}" wx:for-item="item" wx:key="index"
+      class="icon large-text" url="{{item.path}}">
       <view class="{{item.icon}}"></view>
     </navigator>
-    <button style="color: {{frontColor}};" wx:if="{{item.tag=='button'}}" wx:for="{{pagesList}}" wx:for-item="item"
-      wx:key="index" class="icon" open-type="{{item.path}}">
+    <button wx:if="{{item.tag=='button'}}" wx:for="{{pagesList}}" wx:for-item="item" wx:key="index" class="icon"
+      open-type="{{item.path}}">
       <view class="{{item.icon}}"></view>
     </button>
   </view>
-  <view class="content">
+  <view class="content ">
     <slot></slot>
   </view>
-  <view class="mask" catch:tap="{{drawer.onMask}}"></view>
+  <view class="mask" capture-bind:tap="{{drawer.onMask}}"></view>
   <view class="start">
     <view class="shadow"></view>
-    <view class="inner-navbar" style="background-color: {{themeColor}};">
-      <view style="color: {{frontColor}};" class="wellcome">
+    <view class="inner-navbar large-text theme-color">
+      <view class="wellcome">
         <slot name="wellcome"></slot>
       </view>
       <view class="divider"></view>
-      <navigator style="color: {{frontColor}};" wx:if="{{item.tag=='navigator'}}" wx:for="{{pagesList}}"
-        wx:for-item="item" wx:key="index" class="inner-item" url="{{item.path}}">
+      <navigator wx:if="{{item.tag=='navigator'}}" wx:for="{{pagesList}}" wx:for-item="item" wx:key="index"
+        class="inner-item large-text" url="{{item.path}}">
         <view class="{{item.icon}}"> {{item.name}}</view>
       </navigator>
-      <button style="color: {{frontColor}};" wx:if="{{item.tag=='button'}}" wx:for="{{pagesList}}" wx:for-item="item"
-        wx:key="index" class="icon" open-type="{{item.path}}">
+      <button wx:if="{{item.tag=='button'}}" wx:for="{{pagesList}}" wx:for-item="item" wx:key="index"
+        class="icon large-text" open-type="{{item.path}}">
         <view class="{{item.icon}}"> {{item.name}}</view>
       </button>
     </view>

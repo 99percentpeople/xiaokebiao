@@ -1,20 +1,19 @@
 <!-- components/InnerTable/InnerTable.wxml -->
 <view class="table">
-  <view wx:for="{{12}}" wx:key="index">
+  <view wx:if="{{height&&width}}" wx:for="{{12}}" wx:key="index">
     <view class="boundary"
       style="margin-top:{{(index+1)*height/12}}px;  border-bottom:1rpx solid {{index==3?'rgba(255,0,0,0.1)':'rgba(0,0,0,0.1)'}};">
     </view>
   </view>
-  <view wx:for="{{classes}}" wx:key="dgksdm">
-    <view 
-    class="kb-item" 
-    bindtap="showCardView" 
-    data-statu="open" 
-    data-index="{{item.dgksdm}}" 
-    style="margin-left:{{(item.xq-1)*width/7+1}}px;margin-top:{{(item.jcdm[0]-1)*height/12+1}}px;height:{{item.jcdm.length*height/12-2}}px;background-color:{{hiddenArr[index] ?'rgba(0,0,0,0.3)':colorArrays[index%8]}};width: {{width/7-2}}px;"
-    >
-      <view class="kcmc mediumtext">{{item.kcmc}}</view>
-      <view class="jxcdmc smalltext">{{item.jxcdmc}}</view>
+  <view wx:if="{{height&&width}}" wx:for="{{classes}}" wx:key="index">
+    <view class="kb-item" bindtap="showCardView" data-index="{{index}}"
+      style="margin-left:{{(item.xq-1)*width/7+1}}px;margin-top:{{(item.jcdm2[0]-1)*height/12+1}}px;height:{{item.jcdm2.length*height/12-2}}px; background-color:{{hiddenArr[index]&&xiaoxiaole ?'':item.color}};width: {{width/7-2}}px;">
+      <view class="kcmc small-text">{{item.kcmc}}</view>
+      <view class="jxcdmc x-small-text">{{item.zdjxcdmc}}</view>
     </view>
   </view>
+  <view class="loading" wx:if="{{!(height&&width)}}">
+    <van-loading color="#1989fa" size="24px" vertical>加载中</van-loading>
+  </view>
+
 </view>

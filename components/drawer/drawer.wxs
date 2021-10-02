@@ -5,48 +5,55 @@ var pageX = null,
   is = false,
   status = false,
   width = 200,
-  barWidth=40,
+  barWidth=35,
   time = null;
+  moved= false;
 
 var root, mask, move, shadow, bar;
 
-var init = function (s) {
+var init = function (ownerInstance) {
   if (!root || !mask || !move || !shadow || !bar) {
-    root = s.selectComponent(".root");
-    mask = s.selectComponent(".mask");
-    move = s.selectComponent(".start");
-    shadow = s.selectComponent(".shadow");
-    bar = s.selectComponent(".bar");
+    root = ownerInstance.selectComponent(".root");
+    mask = ownerInstance.selectComponent(".mask");
+    move = ownerInstance.selectComponent(".start");
+    shadow = ownerInstance.selectComponent(".shadow");
+    bar = ownerInstance.selectComponent(".bar");
   }
 };
 
-var translate = function (v) {
+var translate = function (value) {
   root.addClass("anime");
-  move.setStyle("transform: translateX(" + (v == false ? -width : 0) + "px)");
-  if (v == true) {
-    root.addClass("status_start");
+  move.setStyle("transform: translateX(" + (value == false ? -width : 0) + "px)");
+  if (value == true) {
+    root.addClass("statusStart");
     mask.setStyle("opacity:1");
     shadow.setStyle("opacity:1");
   } else {
-    root.removeClass("status_start");
+    root.removeClass("statusStart");
     mask.setStyle("opacity:0");
     shadow.setStyle("opacity:0");
   }
-  status = v;
+ // console.log(status)
+  status = value;
+  is = value;
 };
 
 module.exports = {
-  start: function (e, s) {
-    if (status == false && e.touches[0].pageX > barWidth) return;
-    if (status == true && e.touches[0].pageX > 200) return;
+  start: function (event, s) {
+    if (status == false && event.touches[0].pageX > barWidth) return;
+    if (status == true && event.touches[0].pageX > 200) return;
+
+    //console.log("start",JSON.stringify(event.target))
     is = true;
     root.removeClass("anime");
   },
-  move: function (e) {
+  move: function (event) {
+    //console.log("change",JSON.stringify(event))
     if (is == false) return;
-    if (pageX == null) pageX = e.touches[0].pageX;
+    if (pageX == null) pageX = event.touches[0].pageX;
     if (time == null) time = getDate().getTime();
-    var x = e.touches[0].pageX - pageX;
+    
+    var x = event.touches[0].pageX - pageX;
     x = status == true ? 0 + x : x - width;
     x = x > 0 ? 0 : x;
     x = x < -width ? -width : x;
@@ -58,12 +65,14 @@ module.exports = {
     });
     mask.setStyle(opacity);
     shadow.setStyle(opacity);
+    moved=true;
     return false;
   },
-  end: function (e) {
+  end: function (event) {
+    if(moved==false){is=false;return;}
     if (is == false || pageX == null || time == null) return;
     var tm = getDate().getTime() - time;
-    var x = e.changedTouches[0].pageX - pageX;
+    var x = event.changedTouches[0].pageX - pageX;
     var v = status;
     if (status == false) {
       if ((tm < 200 && x > 20) || (tm > 200 && x > 100)) v = true;
@@ -71,17 +80,16 @@ module.exports = {
       if ((tm < 200 && x < -20) || (tm > 200 && x < -100)) v = false;
     }
     translate(v);
-    (is = false), (pageX = null), (time = null);
+    (is = false), (pageX = null), (time = null),(moved=false);
     return false;
   },
-  change: function (v, o, s) {
-    init(s);
-    translate(v);
+  change: function (value, option, ownerInstance) {
+    init(ownerInstance);
   },
   onMask: function () {
     translate(false);
   },
-  onstart:function(){
+  onStart:function(){
     translate(true);
   }
 };

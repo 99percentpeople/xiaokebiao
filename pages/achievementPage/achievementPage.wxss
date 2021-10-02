@@ -1,0 +1,39 @@
+/* pages/achievementPage/achievementPage.wxss */
+.loading{
+  margin-top: 40rpx;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.value-class {
+  flex: none !important;
+}
+
+.pjjd{
+  background-image: linear-gradient(skyblue, #9198e5);
+  height: 150rpx;
+  display: grid;
+  place-items: center;
+  border-radius: 40rpx;
+  margin: 40rpx;
+  color: white;
+  font-size: x-large;
+}
+
+.grid-item{
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.title{
+  font-size:10pt;
+  color: black;
+}
+
+.content{
+  font-size:10pt;
+  color: black;
+}

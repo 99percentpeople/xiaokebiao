@@ -1,67 +1,48 @@
 // index.js
 // 获取应用实例
+import {navOpt} from "../../utils/util"
 
-import test from "../../test";
-import { parsekbRes, generateCalendar } from "../../utils/util";
 const app = getApp();
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
-    pagesList: [
-      {
-        tag: "navigator",
-        icon: "iconfont icon-wodekecheng",
-        name: "我的课表",
-        path: "/pages/accountPage/accountPage",
-      },
-      {
-        tag: "navigator",
-        icon: "iconfont icon-gexinghua",
-        name: "设置",
-        path: "/pages/settingPage/settingPage",
-      },
-      {
-        tag: "navigator",
-        icon: "iconfont icon-bangzhu",
-        name: "帮助",
-        path: "/pages/accountPage/accountPage",
-      },
-    ],
+    navOpt,
     canIUseOpenData:
       wx.canIUse("open-data.type.userAvatarUrl") &&
       wx.canIUse("open-data.type.userNickName"), // 如需尝试获取用户信息可改为false
-
-    kbdata: {
-      classesInfo: parsekbRes(test.test),
-      calendar: generateCalendar(test.firstclass),
-    },
-    themeColor: app.setting.themeColor,
-    frontColor: app.setting.frontColor,
-    bgImgPath: app.setting.bgImgPath,
+    fullscreenImg: app.setting.fullscreenImg,
     bgImg: app.setting.bgImg,
+    style: `
+    --themeColor: ${app.setting.themeColor};
+    --frontColor: ${app.setting.frontColor};
+    --bgImgPath : url(${app.setting.bgImgPath});
+    `,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     app.watchSetting(
-      ["themeColor", "frontColor"],
-      ({ themeColor, frontColor }) =>
-        this.setData({
-          themeColor: themeColor ? themeColor : app.setting.themeColor,
-          frontColor: frontColor ? frontColor : app.setting.frontColor,
-        })
+      ["themeColor", "frontColor","bgImgPath"],
+      () =>
+        this.setData(
+          {
+            style: `
+          --themeColor: ${app.setting.themeColor};
+          --frontColor: ${app.setting.frontColor};
+          --bgImgPath : url(${app.setting.bgImgPath});
+          `
+          },
+        )
     );
+
     app.watchSetting(
-      ["bgImgPath", "bgImg"],
-      ({ bgImgPath, bgImg }) => {
+      [ "bgImg", "fullscreenImg"],
+      () => {
         this.setData({
-          bgImgPath: bgImgPath ? bgImgPath : app.setting.bgImgPath,
-          bgImg: bgImg ? bgImg : app.setting.bgImg,
+          bgImg: app.setting.bgImg,
+          fullscreenImg: app.setting.fullscreenImg,
         });
-      },
+      }
     );
   },
   /**

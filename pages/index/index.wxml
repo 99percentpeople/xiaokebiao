@@ -1,22 +1,21 @@
 <!-- index.wxml -->
-
-<view class="page">
-
-  <drawer class="navbar" themeColor="{{themeColor}}" frontColor="{{frontColor}}" pagesList="{{pagesList}}" vertical>
-    <view slot="wellcome" class="userInfo">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
+<page-meta page-style="{{style}}">
+  <view class="page">
+    <drawer class="navbar" fullscreenImg="{{fullscreenImg}}"
+      pagesList="{{navOpt}}" vertical>
+      <view wx:if="{{canIUseOpenData}}" slot="wellcome" class="userInfo">
+        <view class="userinfo-avatar" bindtap="bindViewTap">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <view class="greet medium-text">
+          <view>欢迎</view>
+          <open-data type="userNickName"></open-data>
+        </view>
       </view>
-      <view class="greet">
-        <view>欢迎</view>
-        <open-data type="userNickName"></open-data>
+      <view class="con ">
+        <ClassTable  fullscreenImg="{{fullscreenImg}}"></ClassTable>
       </view>
-    </view>
-    <image wx:if="{{bgImg}}" src="{{bgImgPath}}" mode="aspectFill" class="bgImg"></image>
-    <view class="con">
-      <ClassTable themeColor="{{themeColor}}" kbdata="{{kbdata}}"></ClassTable>
-    </view>
-    
-  </drawer>
-  
-</view>
+
+    </drawer>
+  </view>
+</page-meta>

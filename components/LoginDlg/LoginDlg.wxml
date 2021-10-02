@@ -1,0 +1,9 @@
+<!--components/LoginDlg/LoginDlg.wxml-->
+<van-dialog use-slot title="请输入验证码" show="{{ showDlg }}" show-cancel-button bind:confirm="onSubmit"
+  customStyle="text-align: center;">
+  <van-image use-loading-slot class="yzmdlg" width="14rem" height="6rem" bindtap="onChange" src="{{tempFilePath}}" >
+    <van-loading slot="loading" type="spinner" size="20" vertical />
+  </van-image>
+  <van-field model:value="{{ verifyCode }}" type="text" label="验证码：" placeholder="请输入验证码">
+  </van-field>
+</van-dialog>

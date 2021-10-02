@@ -1,45 +1,68 @@
 /**app.wxss**/
+@import "/miniprogram_npm/@vant/weapp/common/index.wxss";
+@import "/css/iconfont.wxss";
 
-
-@font-face {
-  font-family: "iconfont"; /* Project id 2779453 */
-  src: url('//at.alicdn.com/t/font_2779453_p2xp3hqk5il.woff2?t=1630666712027') format('woff2'),
-       url('//at.alicdn.com/t/font_2779453_p2xp3hqk5il.woff?t=1630666712027') format('woff'),
-       url('//at.alicdn.com/t/font_2779453_p2xp3hqk5il.ttf?t=1630666712027') format('truetype');
+page,view,text,swiper,swiper-item,image,navigator{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.iconfont {
-  font-family: "iconfont" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+page {
+  background-color: #efefef;
 }
 
-.icon-gexinghua:before {
-  content: "\e639";
+.bgImg{
+  background-image: var(--bgImgPath);
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.x-small-text{
+  text-align: center;
+  font-size: x-small;
+  color: var(--frontColor)
 }
 
-.icon-kaoshixinxi:before {
-  content: "\e61d";
+
+.small-text{
+  text-align: center;
+  font-size: small;
+  color: var(--frontColor)
 }
 
-.icon-zhankai:before {
-  content: "\e7a4";
+.medium-text{
+  text-align: center;
+  font-size: medium;
+  color: var(--frontColor)
 }
 
-.icon-bangzhu:before {
-  content: "\e68e";
+.large-text{
+  text-align: center;
+  font-size: large;
+  color: var(--frontColor)
 }
 
-.icon-ketangxiaoce:before {
-  content: "\e696";
+.theme-color{
+  background-color: var(--themeColor);
 }
 
-.icon-wodekecheng:before {
-  content: "\e69d";
+.transparent-background {
+  background-color: rgba(0, 0, 0, .2);
+  backdrop-filter: blur(1.5px);
 }
 
-.icon-zhanghaozhongxinzhanghaoguanli:before {
-  content: "\e6a0";
+.transparent-black {
+  background-color: rgba(0, 0, 0, .2);
 }
+
+.transparent-white {
+  background-color: rgba(255, 255, 255, .2);
+}
+
+page {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica,
+    Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB",
+    "Microsoft Yahei", sans-serif;
+}
+

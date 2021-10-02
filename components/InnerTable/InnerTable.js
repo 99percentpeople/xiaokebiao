@@ -1,5 +1,7 @@
 // components/InnerTable/InnerTable.js
 //Component Object
+import { jcStart } from "../../utils/util";
+
 const app = getApp();
 
 Component({
@@ -8,6 +10,7 @@ Component({
     weeklist: Array,
     nowdate: Number,
     status: Number,
+    outerIdx: Number,
   },
 
   data: {
@@ -15,51 +18,26 @@ Component({
     height: 0,
     xiaoxiaole: false,
     hiddenArr: [],
-    jcArrays: [
-      "08:30",
-      "09:20",
-      "10:25",
-      "11:15",
-      "13:50",
-      "14:40",
-      "15:30",
-      "16:30",
-      "17:20",
-      "18:30",
-      "19:20",
-      "20:10",
-      "21:00",
-    ],
-    colorArrays: [
-      "#85B8CF",
-      "#90C652",
-      "#D8AA5A",
-      "#FC9F9D",
-      "#0A9A84",
-      "#61BC69",
-      "#12AEF3",
-      "#E29AAD",
-    ],
   },
   observers: {
-    "nowdate,status,xiaoxiaole"() {
-      if (this.data.xiaoxiaole) {
-        this.hideOutdated();
-      } else {
-        this.setData({ hiddenArr: [] });
-      }
+    "nowdate,status"() {
+      this.hideOutdated();
     },
   },
   methods: {
+    showCardView({ currentTarget }) {
+      this.triggerEvent("showcard", {
+        innerIdx: currentTarget.dataset.index,
+        outerIdx: this.properties.outerIdx,
+      });
+    },
     hideOutdated() {
+      let hiddenArr = new Array(this.properties.classes.length);
       switch (this.properties.status) {
         case -1:
-          this.setData({
-            hiddenArr: Array.from("1".repeat(this.properties.classes.length)),
-          });
+          hiddenArr.fill(true);
           break;
         case 0:
-          let hiddenArr = new Array(this.properties.classes.length);
           for (let idx in this.properties.classes) {
             let theclass = this.properties.classes[idx];
             let week = this.properties.weeklist[
@@ -67,22 +45,21 @@ Component({
             ];
             let classdate = Date.parse(
               `${week.y}-${week.m}-${week.d} ${
-                this.data.jcArrays[parseInt(theclass.jcdm[0]) - 1]
+                jcStart[parseInt(theclass.jcdm2[0]) - 1]
               }`
             );
-            hiddenArr[idx] =
-              classdate <= this.properties.nowdate ? true : false;
+            hiddenArr[idx] = classdate < this.properties.nowdate ? true : false;
           }
-          this.setData({ hiddenArr });
           break;
         case 1:
         default:
           break;
       }
+      this.setData({ hiddenArr });
     },
   },
   lifetimes: {
-    attached: function () {
+    attached() {
       wx.createSelectorQuery()
         .in(this)
         .select(".table")

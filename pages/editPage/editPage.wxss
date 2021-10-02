@@ -1,0 +1,77 @@
+/* pages/editPage/editPage.wxss */
+@import "/app.wxss";
+
+.page-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+}
+
+.zc-btn{
+  display: grid;
+  place-items: center;
+  height: 60rpx;
+  border-radius: 40rpx;
+  margin: 10rpx;
+  background-color: whitesmoke;
+  transition: all 0.2s;
+}
+
+.theme-color{
+  background-color: dodgerblue;
+  color: white;
+}
+
+.temp-color{
+  background-color: tomato;
+  color: white;
+}
+
+.topbar{
+  top: 0;
+  background-color: white;
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 80rpx;
+}
+.page-title{
+  width: 90%;
+  text-align: center;
+}
+.tabicon{
+  width: auto!important;
+  height: 100%!important;
+  margin: 30rpx;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.color-picker{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: large;
+  pointer-events:none;
+}
+
+.center{
+  display: flex;
+  justify-content: space-around;
+}

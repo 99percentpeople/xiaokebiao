@@ -1,0 +1,78 @@
+<!--pages/achievementPage/achievementPage.wxml-->
+<van-sticky>
+  <van-dropdown-menu>
+    <van-dropdown-item bindclose="selectxq" id="item1" title="分类">
+      <van-checkbox-group value="{{ result }}" bind:change="onCheckChange">
+        <van-cell-group title="请选择需要查看的学期">
+          <van-cell wx:for="{{ list }}" wx:key="index" title="{{ item }}" value-class="value-class" clickable data-index="{{ index }}" bind:click="toggle">
+            <van-checkbox catch:tap="noop" class="checkboxes-{{ index }}" name="{{ item }}" />
+          </van-cell>
+        </van-cell-group>
+      </van-checkbox-group>
+    </van-dropdown-item>
+    <van-dropdown-item bindclose="selectdata" id="item2" title="筛选">
+      <van-cell title="选修">
+        <van-switch slot="right-icon" size="24px" style="height: 26px" checked="{{ switch1 }}" active-color="#ee0a24" bind:change="onSwitch1Change" />
+      </van-cell>
+      <van-cell title="排序">
+        <van-switch slot="right-icon" size="24px" style="height: 26px" checked="{{ switch2 }}" active-color="#ee0a24" bind:change="onSwitch2Change" />
+      </van-cell>
+    </van-dropdown-item>
+  </van-dropdown-menu>
+</van-sticky>
+
+<view wx:if="{{pjjd}}" class="pjjd">
+  平均绩点:{{pjjd}}
+</view>
+
+<van-divider></van-divider>
+<view class="loading">
+  <van-button round type="primary" bind:click="onShowDlg">更新成绩</van-button>
+</view>
+
+<van-divider></van-divider>
+<view class="loading">
+  <van-loading wx:if="{{isLoading}}" size="24px">加载中...</van-loading>
+</view>
+<!-- <van-cell title="总成绩">{{item.zcj}}</van-cell>
+<van-cell title="绩点">{{item.cjjd}}</van-cell>
+<van-cell title="学分">{{item.xf}}</van-cell>
+<van-cell title="修读方式">{{item.xdfsmc}}</van-cell> -->
+
+<van-cell-group wx:for="{{showData}}"  wx:key="cjdm" title=" " inset>
+  <van-cell title="{{item.kcmc}}" border="{{false}}">
+  </van-cell>
+  <van-grid column-num="2">
+      <van-grid-item use-slot>
+        <view class="grid-item">
+          <text class="title">总成绩</text>
+          <text class="content">{{item.zcj}}</text>
+        </view>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <view class="grid-item">
+          <text class="title">绩点</text>
+          <text class="content">{{item.cjjd}}</text>
+        </view>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <view class="grid-item">
+          <text class="title">学分</text>
+          <text class="content">{{item.xf}}</text>
+        </view>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <view class="grid-item">
+          <text class="title">修读方式</text>
+          <text class="content">{{item.xdfsmc}}</text>
+        </view>
+      </van-grid-item>
+    </van-grid>
+</van-cell-group>
+
+<van-divider wx:if="{{!reportData.length}}" contentPosition="center" customStyle="border-color: var(--themeColor)">
+  还没有成绩哦
+</van-divider>
+<van-divider wx:else></van-divider>
+
+<LoginDlg show="{{showDlg}}" bindnewlogin="onUpdateReport"></LoginDlg>

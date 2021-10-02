@@ -1,11 +1,11 @@
 <!--components/DateBar/DateBar.wxml-->
-<view class="com">
-  <view class="dates-bar">
+<view class="com {{fullscreenImg&&bgImg?'transparent-background':'theme-color'}}">
+  <view  class="dates-bar">
     <view class="date" wx:for="{{weeklist}}" wx:key="index" wx:for-item="date" wx:key="xqmc"
-      style="background-color:{{index==weeknow-1?'skyblue' :''}};{{index==weeknow-1?'border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;':''}}">
-      <view class="rq small-text">{{date.d}}</view>
-      <view class="xq small-text">{{w[date.w]}}</view>
+      style=" transition: all 0.5s; background-color:{{index==weeknow-1?'skyblue' :''}};{{index==weeknow-1?'border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;':''}}">
+      <view   class="rq small-text">{{date.d}}</view>
+      <view   class="xq small-text">{{w[date.w]}}</view>
     </view>
   </view>
-  <view class="month small-text">{{weeklist[0].m}}月</view>
+  <view  class="month small-text">{{weeklist[0].m}}月</view>
 </view>
