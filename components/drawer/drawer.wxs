@@ -1,6 +1,3 @@
-/***
- * 兼容问题 反馈微信：ClassExtends
- * ***/
 var pageX = null,
   is = false,
   status = false,
